@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Actualizer.BusinessLogic.HelperModels
 {
-    class Category
+    public class Category
     {
+        public String Name { get; set; }
+        public String Link { get; set; }
+        public List<Purpose> Purposes { get; set; }
     }
 }

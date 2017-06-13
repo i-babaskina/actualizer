@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Actualizer.BusinessLogic.HelperClasses
 {
-    class ParseHelper
+    public class ParseHelper
     {
+
     }
 }
