@@ -1,0 +1,20 @@
+div[class="x-rating__info"]
+.ChildNodes["a"].Attributes["href"].Value
+
+
+table[class="x-simple-table"] 
+tr qaid="price"
+data-qaid="quality"
+data-qaid="delivery"
+data-qaid="description"
+data-qaid="availability"
+
+span
+data-pl-main-phone="+380 (98) 905-54-38"
+data-pl-contacts-url="https://hottabich.kiev.ua/contacts"
+<div class="x-title x-title_mb_20" data-qaid="company_name"> First()
+
+span class="x-quality-index__percent"
+
+<div class="x-quality-index
+innerText - all text
