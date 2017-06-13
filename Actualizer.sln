@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actualizer", "Actualizer\Actualizer.csproj", "{9E8C2F34-507F-418F-A75B-69EE30ED0712}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actualizer.BusinessLogic", "Actualizer.BusinessLogic\Actualizer.BusinessLogic.csproj", "{1F089694-EC6F-485F-82CB-A3FD7FB549C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actualizer.Data", "Actualizer.Data\Actualizer.Data.csproj", "{78CF607F-0D6B-424A-A453-62516488E9E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{9E8C2F34-507F-418F-A75B-69EE30ED0712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E8C2F34-507F-418F-A75B-69EE30ED0712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E8C2F34-507F-418F-A75B-69EE30ED0712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F089694-EC6F-485F-82CB-A3FD7FB549C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F089694-EC6F-485F-82CB-A3FD7FB549C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F089694-EC6F-485F-82CB-A3FD7FB549C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F089694-EC6F-485F-82CB-A3FD7FB549C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CF607F-0D6B-424A-A453-62516488E9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CF607F-0D6B-424A-A453-62516488E9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CF607F-0D6B-424A-A453-62516488E9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CF607F-0D6B-424A-A453-62516488E9E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
