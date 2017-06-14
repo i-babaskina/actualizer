@@ -11,34 +11,29 @@ namespace Actualizer.BusinessLogic.Services
 {
     public class SearchService
     {
-        public List<Product> GetSearchProduct(String searchTerm)
+        public static SearchModel GetSearchModel(String searchTerm)
         {
-            List<Purpose> purposes = ProductParser.GetProductsFromProm(searchTerm);
-            purposes = purposes.Count >= 24 ? purposes.Take(24).ToList() : purposes;
-            List<Product> products = purposes.Select(p => MapPurposeToProduct(p)).ToList();
-            return products;
+            SearchModel model = new SearchModel();
+            model.SearchTerm = searchTerm;
+            List<Category> categories = new List<Category>();
+            model.Product = ProductService.GetSearchProduct(searchTerm, ref categories);
+            model.Categories = categories;
+
+            return model;
         }
 
-        private Product MapPurposeToProduct(Purpose purpose)
+        public static SearchModel GetSearchModel(String searchTerm, String categoryLink)
         {
-            Shop shop = GetShopFromId(purpose.ShopId);
-            Product product = new Product()
-            {
-                Title = purpose.Title,
-                Price = purpose.Price,
-                ImageLink = purpose.ImageLink,
-                Link = purpose.Link,
-                ShopName = shop.Title,
-            };
+            SearchModel model = new SearchModel();
+            model.SearchTerm = searchTerm;
+            List<Category> categories = new List<Category>();
+            model.Product = ProductService.GetSearchProduct(searchTerm, ref categories);
 
-            return product;
+            return model;
         }
         
        
 
-        private Shop GetShopFromId(string shopId)
-        {
-            return ShopParser.GetShopById(shopId);
-        }
+
     }
 }

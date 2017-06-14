@@ -11,31 +11,17 @@ namespace Actualizer.BusinessLogic.Parsers
 {
     public class ProductParser
     {
-        public static List<Category> GetProductCategories(String productName)
+        public static List<Purpose> GetProductsFromPromAndFillCategories(String product, List<Category> categories, String categoryLink = null)
         {
-            List<Category> categories = new List<Category>();
-            FillCategoriesByProductName(categories, productName);
-            return categories;
-        }
-
-        public static List<Purpose> GetProductsFromProm(String product)
-        {
-            String html = Constants.PRODUCT_SEARCH_IN_PROM + product;
-            var purposes = GetPurposesFromLink(html);
+            Boolean isCategorySelected = !String.IsNullOrEmpty(categoryLink);
+            String html = isCategorySelected ? categoryLink : Constants.PRODUCT_SEARCH_IN_PROM + product;
+            var purposes = GetPurposesFromLinkAndFillCategories(html, !isCategorySelected, categories);
             return purposes;
 
         }
 
-        private static void FillCategoriesByProductName(List<Category> categories, String productName)
+        private static void FillCategories(List<Category> categories, HtmlDocument HD)
         {
-            String html = String.Concat(Constants.PRODUCT_SEARCH_IN_PROM, productName);
-            HtmlDocument HD = new HtmlDocument();
-            var web = new HtmlWeb
-            {
-                AutoDetectEncoding = false,
-                OverrideEncoding = Encoding.UTF8,
-            };
-            HD = web.Load(html);
 
             HtmlNodeCollection cats = HD.DocumentNode.SelectNodes("//div[@class='x-filters-tree__item']");
 
@@ -44,10 +30,10 @@ namespace Actualizer.BusinessLogic.Parsers
                 Int32 counter = 0;
                 foreach (var item in cats)
                 {
-                    if (counter > 5) break;
+                    if (counter > 4) break;
                     Category category = new Category();
-                    category.Name = item.ChildNodes["a"].InnerText;
-                    category.Link = "http://prom.ua" + item.ChildNodes["a"].Attributes["href"].Value;
+                    category.Name = item?.ChildNodes["a"]?.InnerText;
+                    category.Link = "http://prom.ua" + item?.ChildNodes["a"]?.Attributes["href"]?.Value;
                     //category.Purposes = GetMostRelevancePurposes(category.Link);
                     counter++;
                     categories.Add(category);
@@ -57,9 +43,22 @@ namespace Actualizer.BusinessLogic.Parsers
 
         }
 
-        private static List<Purpose> GetMostRelevancePurposes(String html)
+        public static bool GetProductInfoFromProductLink(String productLink, out String sku, out String description, out String descriptionHtml)
         {
-            return GetPurposesFromLink(html).ToList();
+            HtmlDocument HD = new HtmlDocument();
+            var web = new HtmlWeb
+            {
+                AutoDetectEncoding = false,
+                OverrideEncoding = Encoding.UTF8,
+            };
+            HD = web.Load(productLink);
+
+            HtmlNode skuNode = HD.DocumentNode.SelectNodes("//span[@data-qaid='product-sku']").FirstOrDefault();
+            HtmlNode descriptionNode = HD.DocumentNode.SelectNodes("//div[@data-qaid='product_description']").FirstOrDefault();
+            sku = skuNode?.InnerText ?? String.Empty;
+            description = descriptionNode?.InnerText.Trim() ?? String.Empty;
+            descriptionHtml = descriptionNode?.InnerHtml.Trim() ?? String.Empty;
+            return String.IsNullOrEmpty(sku) || String.IsNullOrEmpty(description);
         }
 
         public void Test()
@@ -67,7 +66,7 @@ namespace Actualizer.BusinessLogic.Parsers
 
         }
 
-        private static List<Purpose> GetPurposesFromLink(String html)
+        private static List<Purpose> GetPurposesFromLinkAndFillCategories(String html, Boolean isNeedFillCategories, List<Category> categories)
         {
             HtmlDocument HD = new HtmlDocument();
             var web = new HtmlWeb
@@ -90,51 +89,21 @@ namespace Actualizer.BusinessLogic.Parsers
                 foreach (var item in NoAltElements)
                 {
                     Purpose purpose = new Purpose();
-                    purpose.ImageLink = item.Attributes["data-product-big-picture"].Value;
-                    purpose.Link = item.Attributes["data-product-url"].Value;
-                    purpose.Title = item.Attributes["data-product-name"].Value;
-                    String priceText = item.Attributes["data-product-price"].Value;
-                    purpose.Price = priceText.Replace(" ", String.Empty).Substring(0, priceText.IndexOf("г") - 1);
-                    purpose.ShopId = item.Attributes["data-company-id"].Value;
+                    purpose.ImageLink = item?.Attributes["data-product-big-picture"]?.Value;
+                    purpose.Link = item?.Attributes["data-product-url"]?.Value;
+                    purpose.Title = item?.Attributes["data-product-name"]?.Value;
+                    String priceText = item?.Attributes["data-product-price"]?.Value;
+                    purpose.Price = priceText?.Replace(" ", String.Empty).Substring(0, priceText.IndexOf("г") - 1);
+                    purpose.ShopId = item?.Attributes["data-company-id"]?.Value;
                     purposes.Add(purpose);
                 }
             }
 
-            //if (Items != null && Items[0] != null)
-            //{
-            //    foreach (var item in Items.Concat(ItemsAgain))
-            //    {
-            //        HtmlNode imagePart = null, contentPart = null, pricePart = null, shopPart = null;
-            //        imagePart = item.ChildNodes[0].ChildNodes.Where(x => x.Attributes["class"] != null
-            //                            && x.Attributes["class"].Value.Equals("x-gallery-tile__img x-image-holder")).FirstOrDefault();
-            //        contentPart = item.ChildNodes.Where(x => x.Attributes["class"] != null
-            //                            && x.Attributes["class"].Value.Equals("b-product-gallery__content-spacer")).FirstOrDefault();
-            //        pricePart = item.ChildNodes[0].ChildNodes.Where(x => x.Attributes["itemprop"] != null
-            //                                    && x.Attributes["itemprop"].Value.Equals("offers")).FirstOrDefault()
-            //                                    .ChildNodes.Where(x => x.Attributes["itemprop"] != null
-            //                                    && x.Attributes["itemprop"].Value.Equals("price")).FirstOrDefault();
-            //        shopPart = item.ChildNodes.Where(x => x.Attributes["class"] != null
-            //                        && x.Attributes["class"].Value.Equals("b-product-gallery__content-hidden")).FirstOrDefault()
-            //                        ?.ChildNodes["div"]?.ChildNodes.Where(x => x.Attributes["class"] != null
-            //                       && x.Attributes["class"].Value.Equals("h-mb-5 b-text-hider h-nowrap")).FirstOrDefault();
-            //        Purpose p = new Purpose();
-            //        p.Title = contentPart?.ChildNodes["h3"].ChildNodes["a"].InnerText.Trim();//,
-            //        p.Link = contentPart?.ChildNodes["h3"].ChildNodes["a"].Attributes["href"].Value.Trim();//,
-            //        p.ImageLink = imagePart?.ChildNodes["a"].ChildNodes["img"].Attributes["src"].Value;
-            //        p.Price = pricePart?.InnerText.Trim().Substring(0, pricePart.InnerText.Trim().IndexOf('\n'));//,
-            //        p.ShopName = shopPart?.InnerText.Trim().Replace("&#34;", "");
-            //        var rws = item.ChildNodes.Where(x => x.Attributes["class"] != null
-            //                                        && x.Attributes["class"].Value.Equals("b-product-gallery__content-hidden"))
-            //                                        .FirstOrDefault();
-            //        if (rws != null)
-            //        {
-            //            var reviews = GetReviews(rws);
-            //            p.Rating = reviews.Value.Replace("\n", "").Replace("                        ", " ");
-            //            p.ReviewsLink = reviews.Key;
-            //        }
-            //        purposes.Add(p);
-            //    }
-            //}
+            if (isNeedFillCategories)
+            {
+                FillCategories(categories, HD);
+            }
+            
             return purposes;
         }
 

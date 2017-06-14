@@ -5,17 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Actualizer.BusinessLogic.Parsers;
 using Actualizer.BusinessLogic.Services;
+using Actualizer.Models;
+using Actualizer.Repository;
 
 namespace Actualizer.Controllers
 {
     public class SearchController : Controller
     {
         // GET: Search
-        public ActionResult Index()
+        public ActionResult Index(String searchTerm)
         {
-            SearchService service = new SearchService();
-            var categoriesWithProducts = service.GetSearchProduct("барабан расписной");
-            return View();
+            SearchModel model = new SearchModel();
+            model = SearchRepository.GetSearchModel(searchTerm);
+            return View(model);
         }
     }
 }

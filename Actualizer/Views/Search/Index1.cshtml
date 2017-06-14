@@ -1,59 +1,24 @@
-﻿@model Actualizer.Models.SearchModel
-
-@{
-    ViewBag.Title = "Index";
-}
+﻿@ViewBag
 
 <h2>Search actual</h2>
 
 <div>
     <div>
-        @
-        <form asp-controller="Search" class="form-wrapper cf" asp-action="Index">
-            <input type="text" placeholder="Search here..." required name="searchTerm">
+        <form class="form-wrapper cf">
+            <input type="text" placeholder="Search here..." required>
             <button type="submit">Search</button>
         </form>
     </div>
     <div>
         <div class="col-lg-2">
-            @foreach (var category in Model.Categories) {
-            <p><a href="">@category.Name</a></p>
-            }
+            <% %>
+            <p><a href="">Ударные музыкальные инструменты и аксессуары</a></p>
+            <p><a href="">Перкуссия</a></p>
+            <p><a href="">Акустические ударные установки и барабаны</a></p>
+            <p><a href="">Товары</a></p>
+            <p><a href="">Товары, общее</a></p>
         </div>
         <div class="col-lg-7">
-            @foreach (var product in Model.Product)
-            {
-            <div class="col-sm-4">
-                <img src="@product.ImageLink" />
-                <div>
-                    <a href="">@product.Title</a> <hr />
-                    <a href="/shop/@product.ShopId">@product.ShopName</a><br />
-                    <span>@product.Price</span> UAH<br />
-                    <span>Актуальность предложения: @product.Rating%</span><br />
-                    <a class="btn btn-info" href="@product.Link" target="_blank">Купить на Prom.ua</a>
-                </div>
-            </div>
-            }
-            @*<div class="col-sm-4">
-                <img src="https://images.ua.prom.st/637623731_w200_h200_30252.jpg" />
-                <div>
-                    <a href="">Барабан африканский расписной деревянный</a><hr />
-                    <a href="">Заморские Подарки</a><br />
-                    <span>507</span> UAH<br />
-                    <span>Актуальность предложения: 92%</span><br />
-                    <button class="btn btn-info">Купить на Prom.ua</button>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <img src="https://images.ua.prom.st/708751832_w200_h200_cid63760_pid497296378-9c2a397d.jpg" />
-                <div>
-                    <a href="">Барабан расписной дерево с кожей (50х19х19см)</a> <hr />
-                    <a href="">Интернет магазин Старик Хоттабыч</a><br />
-                    <span>1481</span> UAH<br />
-                    <span>Актуальность предложения: 86%</span><br />
-                    <button class="btn btn-info">Купить на Prom.ua</button>
-                </div>
-            </div>
             <div class="col-sm-4">
                 <img src="https://images.ua.prom.st/708751832_w200_h200_cid63760_pid497296378-9c2a397d.jpg" />
                 <div>
@@ -64,7 +29,36 @@
                     <button class="btn btn-info">Купить на Prom.ua</button>
                 </div>
             </div>
-        </div>*@
+            <div class="col-sm-4">
+                <img src="https://images.ua.prom.st/637623731_w200_h200_30252.jpg" />
+                <div>
+                    <a href="">Барабан африканский расписной деревянный</a><hr />
+                    <a href="">Заморские Подарки</a><br />
+                    <span>507</span> UAH<br />
+                    <span>Актуальность предложения: 92%</span><br />
+<button class="btn btn-info">Купить на Prom.ua</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="https://images.ua.prom.st/708751832_w200_h200_cid63760_pid497296378-9c2a397d.jpg" />
+                <div>
+                    <a href="">Барабан расписной дерево с кожей (50х19х19см)</a> <hr />
+                    <a href="">Интернет магазин Старик Хоттабыч</a><br />
+                    <span>1481</span> UAH<br />
+                    <span>Актуальность предложения: 86%</span><br />
+<button class="btn btn-info">Купить на Prom.ua</button>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="https://images.ua.prom.st/708751832_w200_h200_cid63760_pid497296378-9c2a397d.jpg" />
+                <div>
+                    <a href="">Барабан расписной дерево с кожей (50х19х19см)</a> <hr />
+                    <a href="">Заморские Подарки</a><br />
+                    <span>1071</span> UAH<br />
+                    <span>Актуальность предложения: 92%</span><br />
+<button class="btn btn-info">Купить на Prom.ua</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-

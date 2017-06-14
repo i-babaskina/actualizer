@@ -10,6 +10,5 @@ namespace Actualizer.BusinessLogic.HelperModels
     {
         public String Name { get; set; }
         public String Link { get; set; }
-        public List<Purpose> Purposes { get; set; }
     }
 }

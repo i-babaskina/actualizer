@@ -51,6 +51,7 @@
     <Compile Include="HelperModels\PossibleResales.cs" />
     <Compile Include="HelperModels\Product.cs" />
     <Compile Include="HelperModels\Purpose.cs" />
+    <Compile Include="HelperModels\SearchModel.cs" />
     <Compile Include="HelperModels\SearhResult.cs" />
     <Compile Include="Parsers\ProductParser.cs" />
     <Compile Include="Parsers\ShopParser.cs" />
