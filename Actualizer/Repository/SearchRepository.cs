@@ -12,8 +12,8 @@ namespace Actualizer.Repository
     {
         public static SearchModel GetSearchModel(String searchTerm)
         {
-
-            BusinessLogic.HelperModels.SearchModel serviceModel = SearchService.GetSearchModel("барабан расписной");
+            if (String.IsNullOrEmpty(searchTerm)) return new SearchModel();
+            BusinessLogic.HelperModels.SearchModel serviceModel = SearchService.GetSearchModel(searchTerm);
             SearchModel model = new SearchModel()
             {
                 SearchTerm = serviceModel.SearchTerm,

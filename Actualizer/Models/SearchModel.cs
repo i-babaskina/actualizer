@@ -12,5 +12,11 @@ namespace Actualizer.Models
         public String Url { get; set; }
         public List<Category> Categories { get; set; }
         public List<Product> Product { get; set; }
+
+        public SearchModel()
+        {
+            Categories = new List<Category>();
+            Product = new List<Product>();
+        }
     }
 }

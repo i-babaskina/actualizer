@@ -13,8 +13,8 @@ namespace Actualizer.Data.Models
         public String Email { get; set; }
         public String Password { get; set; }
 
-        public List<Review> Reviews { get; set; }
+        public virtual List<Review> Reviews { get; set; }
 
-        public List<Bookmark> Bookmarks { get; set; }
+        public virtual List<Bookmark> Bookmarks { get; set; }
     }
 }

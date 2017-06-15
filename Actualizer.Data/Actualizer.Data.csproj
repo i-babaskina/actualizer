@@ -49,13 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\ActualizerContext.cs" />
+    <Compile Include="DAL\ActualizerInitializer.cs" />
+    <Compile Include="DAL\Configuration.cs" />
     <Compile Include="DAL\DbBookmarkService.cs" />
     <Compile Include="DAL\DbCharacteristicsService.cs" />
     <Compile Include="DAL\DbReviewService.cs" />
     <Compile Include="DAL\DbShopService.cs" />
     <Compile Include="DAL\DbUserService.cs" />
     <Compile Include="Models\Bookmark.cs" />
-    <Compile Include="Models\Characeteristics.cs" />
+    <Compile Include="Models\Characteristics.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Shop.cs" />
     <Compile Include="Models\User.cs" />

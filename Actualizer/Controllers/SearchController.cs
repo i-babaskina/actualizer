@@ -7,6 +7,8 @@ using Actualizer.BusinessLogic.Parsers;
 using Actualizer.BusinessLogic.Services;
 using Actualizer.Models;
 using Actualizer.Repository;
+using System.Data.Entity;
+using Actualizer.Data.DAL;
 
 namespace Actualizer.Controllers
 {

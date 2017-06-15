@@ -47,12 +47,12 @@ namespace Actualizer.BusinessLogic.Parsers
             
 
             Shop shop = new Shop();
-            shop.Id = Int64.Parse(shopId);
+            shop.PromId = Int64.Parse(shopId);
             shop.Title = titleDataNode.InnerText.Trim();
             shop.PhoneNumber = contactDataNode.Attributes["data-pl-main-phone"].Value;
             shop.ShopLink = contactDataNode.Attributes["data-pl-contacts-url"].Value;
             shop.Address = addressDataNode.InnerText.Trim();
-                Characeteristics characteristics =  new Characeteristics();
+                Characteristics characteristics =  new Characteristics();
             //{
             characteristics.Availability = Double.Parse(availabilityNode.InnerText.Trim().Replace("%", ""));
             characteristics.Description = Double.Parse(descriptionNode.InnerText.Trim().Replace("%", ""));
